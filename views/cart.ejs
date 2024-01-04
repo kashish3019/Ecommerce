@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cart</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+    }
+
+    .product {
+      border: 1px solid black;
+      padding: 20px;
+      margin: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-info {
+      margin-left: 20px;
+    }
+
+    .product button {
+      padding-left: 12px;
+      padding-right: 12px;
+      margin: 5px;
+    }
+
+    #content {
+      display: flex;
+      width: 100%;
+    }
+
+    #products-container {
+      flex: 0 0 70%;
+      overflow-y: auto;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+    }
+
+
+
+    header {
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+
+    /* CSS styles for the coupon code input and apply button */
+    .maindiv2 {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .promocode {
+      padding: 8px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .apply {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .apply:hover {
+      background-color: #0056b3;
+    }
+
+    /* Styles for the discount and total price section */
+    h3,
+    h4 {
+      margin: 5px 0;
+    }
+
+    #box2 h3 {
+      font-size: 16px;
+    }
+
+    #box2 h4 {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("nav") %>
+    <div id="content">
+      <div id="products-container">
+        <div id="box"></div>
+      </div>
+
+      <div id="coupon-section">
+        <div class="maindiv2">
+          <input class="promocode" placeholder="Enter your promo code"><br>
+          <button class="apply">Apply</button>
+        </div>
+        <h3 id="discount-text" style="display: none;">Discount: $0.00</h3>
+        <h4 id="final-price-text" style="display: none;">Total: $0.00</h4>
+        <div id="box2">
+          <button id="final-price-button">Total Price: $0.00</button>
+          <h3 id="price"></h3>
+        </div>
+      </div>
+    </div>
+</body>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  const updateQty = (id, qty) => {
+    fetch(`/product/cart/update/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ qty })
+    })
+      .then((res) => res.json())
+      .then((response) => get())
+      .catch((err) => console.log(err))
+  }
+
+  const handlePayment = async (amount) => {
+    let res = await fetch("/product/payment", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: amount })
+    })
+    let order = await res.json()
+    let option = { key: "rzp_test_aseYwd9Lw0lp7m", amount: order.amount }
+    let razorpay = new Razorpay(option)
+    razorpay.open()
+  }
+
+  let totalprice = 0
+  const display = (data) => {
+    totalprice = 0;
+    document.getElementById("box").innerHTML = "";
+    document.getElementById("box2").innerHTML = "";
+    console.log(data);
+    data.map((element) => {
+      let ele = element.productId
+      totalprice += ele.price * element.qty
+
+      let img = document.createElement("img");
+      img.src = ele.img;
+
+      let title = document.createElement("h1");
+      title.innerHTML = ele.title;
+
+      let category = document.createElement("h3");
+      category.innerHTML = ele.category;
+
+      let price = document.createElement("h2");
+      price.innerHTML = ele.price;
+
+      let btn1 = document.createElement("button")
+      btn1.innerHTML = "-"
+      btn1.addEventListener("click", () => { updateQty(element._id, -1) })
+      let qty = document.createElement("span")
+      qty.innerHTML = element.qty
+      let btn2 = document.createElement("button")
+      btn2.innerHTML = "+"
+      btn2.addEventListener("click", () => { updateQty(element._id, +1) })
+
+      let infoDiv = document.createElement("div");
+      infoDiv.className = "product-info";
+      infoDiv.append(title, category, price, btn1, qty, btn2);
+
+      let productDiv = document.createElement("div");
+      productDiv.className = "product";
+      productDiv.append(img, infoDiv);
+
+      document.getElementById("box").append(productDiv);
+    });
+
+    let priceBtn = document.createElement("button")
+    priceBtn.innerHTML = `Total Price: ${totalprice}`
+    document.getElementById("box2").append(priceBtn)
+    priceBtn.addEventListener("click", () => handlePayment(totalprice))
+    updateTotalPriceButton();
+  };
+  const updateTotalPriceButton = () => {
+    const finalPriceButton = document.getElementById("final-price-button");
+    finalPriceButton.innerText = `Total Price: $${totalprice.toFixed(2)}`;
+  };
+  const get = async () => {
+    fetch("/product/cartdata")
+      .then((response) => response.json())
+      .then((response) => display(response))
+      .catch((error) => console.log(error));
+  }
+
+  const applyPromoCode = () => {
+    const enteredCode = document.querySelector(".promocode").value.trim();
+    const dispriceText = document.getElementById("discount-text");
+    const finalPriceText = document.getElementById("final-price-text");
+    const finalPriceButton = document.getElementById("final-price-button");
+
+    if (enteredCode === "kashish3019") {
+      const discount = (totalprice / 100) * 20;
+      const discountedPrice = totalprice - discount;
+
+      dispriceText.innerHTML = `Discount: $${discount.toFixed(2)}`;
+      dispriceText.style.display = "block";
+
+      finalPriceText.innerHTML = `Total: $${discountedPrice.toFixed(2)}`;
+      finalPriceText.style.display = "block";
+
+      finalPriceButton.innerText = `Total Price: $${discountedPrice.toFixed(2)}`;
+    } else {
+      alert("Invalid promo code");
+    }
+  };
+
+  document.querySelector(".apply").addEventListener("click", applyPromoCode);
+
+  document.querySelector(".promocode").addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      applyPromoCode();
+    }
+  });
+
+  get()
+</script>
+
+</html>

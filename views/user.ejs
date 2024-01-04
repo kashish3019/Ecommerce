@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user</title>
+  <style>
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    #box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("nav") %>
+    <div id="box"></div>
+</body>
+<script>
+  const display = (data) => {
+    document.getElementById("box").innerHTML = "";
+    data.map((ele) => {
+      let img = document.createElement("img");
+      img.src = ele.img;
+      let title = document.createElement("h2");
+      title.innerHTML = ele.title;
+      let category = document.createElement("h3");
+      category.innerHTML = ele.category;
+      let price = document.createElement("p");
+      price.innerHTML = ele.price;
+
+      let stock = document.createElement("span");
+      stock.innerHTML = ele.stock;
+      let size = document.createElement("span");
+      size.innerHTML = ele.size;
+      let div = document.createElement("div");
+      div.append(img, title, category, price, size, stock);
+      document.getElementById("box").append(div);
+    });
+  };
+
+  fetch("/product/adminProduct")
+    .then((response) => response.json())
+    .then((response) => display(response))
+    .catch((error) => console.log(error));
+</script>
+
+</html>

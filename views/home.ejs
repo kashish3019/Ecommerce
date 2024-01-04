@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>home</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    #box {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+  </style>
+</head>
+
+<body>
+  <%- include("nav") %>
+    <div id="box"></div>
+</body>
+<script>
+  const handlecart = (id) => {
+    
+    console.log(id);
+    fetch("/product/cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ productId: id }),
+    })
+  }
+  const display = (data) => {
+    document.getElementById("box").innerHTML = "";
+    data.map((ele) => {
+      let img = document.createElement("img");
+      img.src = ele.img;
+      let title = document.createElement("h2");
+      title.innerHTML = ele.title;
+      let category = document.createElement("h3");
+      category.innerHTML = ele.category;
+      let price = document.createElement("p");
+      price.innerHTML = ele.price;
+      let size=document.createElement("h2");
+      size.innerHTML = ele.size;
+      let stock = document.createElement("h3");
+      stock.innerHTML=ele.stock;
+      let colour = document.createElement("h3");
+      colour.innerHTML=ele.colour;
+      let btn1 = document.createElement("button");
+      btn1.innerHTML = "Buy";
+
+      btn1.addEventListener("click", () => {
+        handlecart(ele._id);
+      })
+      let div = document.createElement("div");
+      div.append(img, title, category, price, size,stock,colour,btn1);
+      document.getElementById("box").append(div);
+    });
+  };
+
+  fetch("/product")
+    .then((response) => response.json())
+    .then((response) => display(response))
+    .catch((error) => console.log(error));
+</script>
+
+</html>
