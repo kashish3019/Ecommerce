@@ -3,12 +3,10 @@ const mongoose = require("mongoose");
 const ProSchema = new mongoose.Schema({
   title: String,
   price: Number,
-  desc: String,
   category: String,
   img: String,
-  stock: Number,
+  availability: String,
   rating: [{ userid: String, value: Number }],
-  size: String,
   colour: String,
   createdBy: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 });

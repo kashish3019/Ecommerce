@@ -2,74 +2,1052 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>home</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
 
-    }
+        }
 
-    img {
-      width: 200px;
-      height: 200px;
-    }
+        #box img {
+            width: 200px;
+            height: 200px;
+        }
 
-    #box {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-  </style>
+        #box {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 50px;
+        }
+
+        .banner img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: auto;
+        }
+
+        .w-25 {
+            width: 25%;
+            padding: 15px;
+        }
+
+        .w-33 {
+            width: 33%;
+            padding: 15px;
+        }
+
+        .w-50 {
+            width: 50%;
+        }
+
+        .w-60 {
+            width: 60%;
+        }
+
+        .w-40 {
+            width: 40%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: nowrap;
+        }
+
+        /* banner-2 section  */
+        .banner-2 {
+            padding: 50px;
+        }
+
+        .banner-2 .banners {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        .banner-2 .banners img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .banner-2 .banners .overlay {
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            right: 0;
+            background-color: rgba(85, 89, 91, 0.379);
+            overflow: hidden;
+            width: 100%;
+            height: 0;
+            opacity: 0;
+            transition: .5s ease;
+        }
+
+        .banner-2 .banners:hover .overlay {
+            bottom: 0;
+            height: 100%;
+            opacity: 1;
+        }
+
+        /* product section  */
+        .heading {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .chair-icon {
+            position: relative;
+            text-align: center;
+            font-size: 30px;
+            padding: 10px;
+        }
+
+        .chair-icon i::after {
+            position: absolute;
+            content: "";
+            width: 250px;
+            height: 3px;
+            padding: 1px;
+            border-top: 1px solid rgba(128, 128, 128, 0.304);
+            border-bottom: 1px solid rgba(128, 128, 128, 0.304);
+            bottom: 0;
+            top: 5px;
+            margin: auto;
+            left: 10px;
+            z-index: -1;
+            right: 0;
+        }
+
+        .chair-icon i::before {
+            background-color: white;
+            padding-right: 20px;
+            padding-left: 20px;
+            position: absolute;
+            right: 550px;
+            left: 545px;
+            width: 20px;
+            top: 15px;
+            z-index: 999;
+        }
+
+        /* heading section  */
+        .heading-2 {
+            justify-content: center;
+            text-align: center;
+            width: 390px;
+            margin: auto;
+            padding-top: 5px;
+        }
+
+        .heading-2 ul {
+            list-style: none;
+        }
+
+        .heading-2 ul li {
+            padding: 20px;
+            margin: 10px;
+            transition: all 0.5s;
+        }
+
+        .heading-2 ul li:hover {
+            background-color: #ffce24;
+        }
+
+        /* furniture section  */
+        .furniture {
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .furniture h4 {
+            font-weight: 300;
+            letter-spacing: 1px;
+            word-spacing: 5px;
+            padding-bottom: 25px;
+        }
+
+        .furniture h2 {
+            font-size: 55px;
+            font-weight: 400;
+            line-height: 55px;
+            padding: 20px;
+        }
+
+        .furniture h2 span {
+            font-size: 45px;
+        }
+
+        .furniture p {
+            font-size: 15px;
+            padding: 10px 35px;
+            line-height: 25px;
+            color: #666666;
+            letter-spacing: 1px;
+            word-spacing: 2px;
+        }
+
+        .furniture button {
+            background-color: #ffce24;
+            border: none;
+            padding: 15px 30px;
+            font-size: 15px;
+            margin: 20px;
+            transition: all 0.5s;
+        }
+        .furniture button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .img-furniture {
+            background-color: #4e4e4e;
+            margin-left: 120px;
+            position: relative;
+            width: 450px;
+            height: 600px;
+        }
+
+        .img-furniture .img-box1 {
+            position: absolute;
+            top: 80px;
+            right: 250px;
+        }
+
+        .img-furniture .img-box2 {
+            position: absolute;
+            top: 80px;
+            right: -100px;
+        }
+
+        .img-furniture .img-box1 img,
+        .img-furniture .img-box2 img {
+            width: 300px;
+        }
+
+
+        .icon-hover {
+            position: absolute;
+            bottom: 0;
+            height: 450px;
+            width: 300px;
+            opacity: 0;
+            transition: .2s ease;
+            background-color: rgba(23, 22, 22, 0.169);
+        }
+
+        .img-box1:hover .icon-hover,
+        .img-box2:hover .icon-hover {
+            opacity: 1;
+            margin-bottom: 5px;
+        }
+
+        .img-furniture .icon {
+            color: white;
+            font-size: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+
+        }
+
+        /* product images section css */
+        .product-box {
+            margin: 50px 0;
+        }
+
+        .main-image-div {
+            position: relative;
+        }
+
+        .main-image-div .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .main-image-div .image-div {
+            position: absolute;
+            width: 50px;
+            height: 80px;
+            z-index: 9;
+            border: 3px solid white;
+            right: 5px;
+            bottom: 8px;
+            transition: all 0.5s;
+        }
+
+        .main-image-div .image-div img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-image-div:hover .image-div {
+            width: 100%;
+            height: 100%;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        .main-image-div .icon-div {
+            position: absolute;
+            top: 10px;
+            right: 50px;
+            z-index: 99;
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+
+        .main-image-div:hover .icon-div {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .main-image-div .icon-div i {
+            position: absolute;
+            background-color: #366e78;
+            color: white;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .main-image-div .icon-div i:first-child {
+            transition: all 0.2s;
+        }
+
+        .main-image-div .icon-div i:nth-child(2) {
+            transition: all 0.5s;
+        }
+
+        .main-image-div .icon-div i:nth-child(3) {
+            transition: all 0.8s;
+        }
+
+        .main-image-div .icon-div i:last-child {
+            transition: all 1s;
+        }
+
+        .main-image-div:hover .icon-div i:nth-child(2) {
+            top: 40px;
+        }
+
+        .main-image-div:hover .icon-div i:nth-child(3) {
+            top: 80px;
+        }
+
+        .main-image-div:hover .icon-div i:last-child {
+            top: 120px;
+        }
+
+        .product-box .image-content {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .product-box .image-content i {
+            color: #fbaf5d;
+            font-size: 13px;
+        }
+
+        .product-box .image-content span i {
+            color: #d9d9d9;
+            font-size: 13px;
+        }
+
+        .product-box .image-content h5 {
+            font-size: 14px;
+            color: #666666;
+            padding: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .product-box .image-content p {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* decorative crafts section css */
+        .crafts {
+            padding: 100px 0;
+        }
+
+        .crafts .crafts-img {
+            position: relative;
+        }
+
+        .crafts .crafts-img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .crafts .crafts-img .crafts-img-2 {
+            position: absolute;
+            right: -50px;
+            bottom: -80px;
+            z-index: 9;
+        }
+
+        .crafts .crafts-img .bg-box {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            border-radius: 100%;
+            background-color: white;
+            border-left: 25px solid #ffce24;
+            transform: rotate(30deg);
+            right: -120px;
+            bottom: -50px;
+        }
+
+        .crafts-content {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .crafts .crafts-content h4 {
+            font-weight: 300;
+            letter-spacing: 1px;
+            word-spacing: 5px;
+            padding-bottom: 15px;
+        }
+
+        .crafts .crafts-content h2 {
+            font-size: 55px;
+            font-weight: 400;
+            line-height: 55px;
+            padding: 10px;
+        }
+
+        .crafts .crafts-content h2 span {
+            font-size: 45px;
+        }
+
+        .crafts .crafts-content p {
+            font-size: 15px;
+            padding: 5px 50px;
+            line-height: 25px;
+            color: #666666;
+            letter-spacing: 1px;
+            word-spacing: 2px;
+        }
+
+        .crafts .crafts-content button {
+            background-color: #ffce24;
+            border: none;
+            padding: 15px 30px;
+            font-size: 15px;
+            margin: 20px;
+            transition: all 0.5s;
+        }
+
+        .crafts .crafts-content button:hover {
+            background-color: black;
+            color: white;
+        }
+
+        /* banner-3 section css */
+        .banner-img-3 {
+            padding: 100px 0;
+        }
+
+        .banner-img-3 img {
+            width: 100%;
+        }
+
+        /* service section css */
+        .service {
+            margin-bottom: 50px;
+        }
+
+        .service-box {
+            text-align: center;
+        }
+
+        .border-box {
+            border-left: 1px solid #e1e1e1;
+            border-right: 1px solid #e1e1e1;
+        }
+
+        .service-box img {
+            transition: all 0.5s;
+        }
+
+        .service-box .service-content h2 {
+            font-size: 18px;
+            color: #111111;
+            font-weight: 600;
+            padding-top: 20px;
+            transition: all 0.2s;
+        }
+
+        .service-box .service-content p {
+            font-size: 13px;
+            color: #666666;
+            font-weight: 600;
+            letter-spacing: 1px;
+            padding: 10px;
+        }
+
+        .service-box:hover .service-content h2 {
+            color: #366e78;
+        }
+
+        .service-box:hover img {
+            transform: rotateY(180deg);
+        }
+
+        /* latest news section css */
+        .news {
+            padding: 50px 0;
+        }
+
+        .news .latest-news img {
+            width: 100%;
+        }
+
+        .news .latest-news {
+            position: relative;
+        }
+
+        .news .latest-news .latest-news-content {
+            position: absolute;
+            background-color: white;
+            padding: 25px;
+            margin: 25px;
+            bottom: 0;
+        }
+
+        .news .latest-news .latest-news-content h3 {
+            font-size: 16px;
+            color: #111111;
+            letter-spacing: 1px;
+        }
+
+        .news .latest-news .latest-news-content p {
+            font-size: 15px;
+            color: #666666;
+            letter-spacing: 1px;
+            padding: 10px 0;
+        }
+
+        .news .latest-news .latest-news-content a {
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 1px;
+        }
+
+        .news .latest-news .latest-news-content a:hover {
+            color: #111111;
+        }
+
+        .news .latest-news .latest-news-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.335);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s;
+        }
+
+        .news .latest-news .latest-news-overlay i {
+            width: 60px;
+            height: 60px;
+            border: 2px solid white;
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            line-height: 60px;
+            border-radius: 50%;
+            position: absolute;
+            left: 40%;
+            right: 40%;
+            top: 40%;
+            bottom: 40%;
+            transition: all 0.3s;
+        }
+
+        .news .latest-news:hover .latest-news-overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .news .latest-news:hover .latest-news-overlay i {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            left: 43%;
+            right: 47%;
+            top: 43%;
+            bottom: 47%;
+        }
+    </style>
 </head>
 
 <body>
-  <%- include("nav") %>
-    <div id="box"></div>
+    <%- include("nav") %>
+        <section class="banner">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <!-- Slides -->
+                    <div class="swiper-slide">
+                        <img src="https://opencart.templatetrip.com/OPC04/OPC102_intraart/OPC03/image/cache/catalog/demo/banners/slider-02-1903x950.jpg"
+                            alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://opencart.templatetrip.com/OPC04/OPC102_intraart/OPC03/image/cache/catalog/demo/banners/slider-01-1903x950.jpg"
+                            alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://opencart.templatetrip.com/OPC04/OPC102_intraart/OPC03/image/cache/catalog/demo/banners/slider-02-1903x950.jpg"
+                            alt="">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://opencart.templatetrip.com/OPC04/OPC102_intraart/OPC03/image/cache/catalog/demo/banners/slider-01-1903x950.jpg"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner 2  -->
+        <section class="banner-2">
+            <div class="container">
+                <div class="row">
+                    <div class="w-50 banners">
+                        <div class="overlay"></div>
+                        <img src="img/banner-01.jpg" alt="">
+                    </div>
+                    <div class="w-50 banners">
+                        <div class="overlay"></div>
+                        <img src="img/banner-02.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- product section  -->
+        <section>
+            <div class="container">
+                <h2 class="heading">TRENDING PRODUCTS</h2>
+                <div class="chair-icon">
+                    <i class="fa-solid fa-chair"></i>
+                </div>
+                <div class="heading-2">
+                    <ul class="row">
+                        <li><a href="#">Featured</a></li>
+                        <li><a href="#">Latest</a></li>
+                        <li><a href="#">BestSeller</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- product images section  -->
+        <section class="product-box">
+            <div class="container">
+                <div class="row">
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/01-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/01--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Aliquam Quaerat Voluptatem</h5>
+                            <p>$122.00</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/05-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/05--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Magni Dolores Eosquies</h5>
+                            <p>$122.00</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/19-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/19--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Voluptate Velit Esse</h5>
+                            <p>$123.20</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/09-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/09--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Perspiciatis Unde Omnis</h5>
+                            <p>$14.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/04-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/04--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Aspetur Autodit Autfugit</h5>
+                            <p>$122.00</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/17-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/17--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Voluptas Nulla Pariatur</h5>
+                            <p>$1,202.00</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/11-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/11--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Quis Autem Veleuminium</h5>
+                            <p>$2000.00</p>
+                        </div>
+                    </div>
+                    <div class="w-25">
+                        <div class="main-image-div">
+                            <div class="product-img">
+                                <img src="/img/03-385x500.jpg" alt="Product Image">
+                            </div>
+                            <div class="image-div">
+                                <img src="/img/03--385x500.jpg" alt="Additional Image">
+                            </div>
+                            <div class="icon-div">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <i class="fa-regular fa-heart"></i>
+                                <i class="fa-solid fa-chart-simple"></i>
+                                <i class="fa-regular fa-eye"></i>
+                            </div>
+                        </div>
+                        <div class="image-content">
+                            <span>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </span>
+                            <h5>Aliquam Quat Voluptatem</h5>
+                            <p>$122.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- furniture section  -->
+        <section>
+            <div class="container">
+                <div class="furniture row">
+                    <div class="w-40">
+                        <h4>-Modern Furniture-</h4>
+                        <h2>FURNITURE </br>
+                            <span>STORE</span>
+                        </h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur do eiusmod tempor incididunt ut labore et dolore
+                            magna minim veniam, quis exercitation ullamco laboris..</p>
+                        <button>Shop Now</button>
+                    </div>
+                    <div class="w-60">
+                        <div class="img-furniture row">
+                            <div class="img-box1">
+                                <img src="/img/furniture-1.jpg" alt="" class="image">
+                                <div class="icon-hover">
+                                    <a href="#" class="icon">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="img-box2">
+                                <img src="/img/furniture-2.jpg" alt="" class="image">
+                                <div class="icon-hover">
+                                    <a href="#" class="icon">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <!-- decorative crafts section  -->
+        <section class="crafts">
+            <div class="container">
+                <div class="row">
+                    <div class="w-50">
+                        <div class="crafts-img">
+                            <img src="/img/cms-img-01.jpg" alt="">
+                            <div class="crafts-img-2">
+                                <img src="/img/cms-img-02.png" alt="">
+                            </div>
+                            <div class="bg-box"></div>
+                        </div>
+                    </div>
+                    <div class="w-50">
+                        <div class="crafts-content">
+                            <h4>- Modern Furniture -</h4>
+                            <h2>DECORATIVE </br>
+                                <span>CRAFTS</span>
+                            </h2>
+                            <p>Lorem ipsum eiusmod dolor adi eiusmod incididunt.adi eiusmod tempor adi eiusmod tempor.
+                            </p>
+                            <button>Shop Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- banner 3 -->
+        <section class="banner-img-3">
+            <div class="container">
+                <img src="/img/banner-03.jpg" alt="">
+            </div>
+        </section>
+        <!-- service section  -->
+        <section class="service">
+            <div class="container">
+                <div class="row">
+                    <div class="w-33">
+                        <div class="service-box">
+                            <img src="/img/piggy.png" alt="">
+                            <div class="service-content">
+                                <h2>GET BIG SAVINGS</h2>
+                                <p>Get Big Dicount Every Day !</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-33 border-box">
+                        <div class="service-box">
+                            <img src="/img/head-phone.png" alt="">
+                            <div class="service-content">
+                                <h2>24*7 SUPPORTS ONLINE</h2>
+                                <p>Get Big Dicount Every Day !</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-33">
+                        <div class="service-box">
+                            <img src="/img/truck.png" alt="">
+                            <div class="service-content">
+                                <h2>FREE TO DEVIVERY</h2>
+                                <p>On Order Over $199.00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- latest news section  -->
+        <section class="news">
+            <div class="container">
+                <h2 class="heading">LATEST NEWS</h2>
+                <div class="chair-icon">
+                    <i class="fa-solid fa-chair"></i>
+                </div>
+                <div class="row">
+                    <div class="w-33">
+                        <div class="latest-news">
+                            <div class="latest-news-overlay">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <img src="/img/3-home-default -390x520.jpg" alt="">
+                            <div class="latest-news-content">
+                                <h3>Aliquam Quaerat Voluptatem</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting ...</p>
+                                <a href="#">Read More <i class="fa-solid fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-33">
+                        <div class="latest-news">
+                            <div class="latest-news-overlay">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <img src="/img/2-home-default -390x520.jpg" alt="">
+                            <div class="latest-news-content">
+                                <h3>suscipit laboriosam nisi</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industr...</p>
+                                <a href="#">Read More <i class="fa-solid fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-33">
+                        <div class="latest-news">
+                            <div class="latest-news-overlay">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <img src="/img/1-home-default -390x520.jpg" alt="">
+                            <div class="latest-news-content">
+                                <h3>voluptate velit esse</h3>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting ...</p>
+                                <a href="#">Read More <i class="fa-solid fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include("footer") %>
 </body>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  const handlecart = (id) => {
-    
-    console.log(id);
-    fetch("/product/cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ productId: id }),
-    })
-  }
-  const display = (data) => {
-    document.getElementById("box").innerHTML = "";
-    data.map((ele) => {
-      let img = document.createElement("img");
-      img.src = ele.img;
-      let title = document.createElement("h2");
-      title.innerHTML = ele.title;
-      let category = document.createElement("h3");
-      category.innerHTML = ele.category;
-      let price = document.createElement("p");
-      price.innerHTML = ele.price;
-      let size=document.createElement("h2");
-      size.innerHTML = ele.size;
-      let stock = document.createElement("h3");
-      stock.innerHTML=ele.stock;
-      let colour = document.createElement("h3");
-      colour.innerHTML=ele.colour;
-      let btn1 = document.createElement("button");
-      btn1.innerHTML = "Buy";
+    const swiper = new Swiper('.swiper', {
+        direction: 'horizontal',
+        loop: true,
+        autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
 
-      btn1.addEventListener("click", () => {
-        handlecart(ele._id);
-      })
-      let div = document.createElement("div");
-      div.append(img, title, category, price, size,stock,colour,btn1);
-      document.getElementById("box").append(div);
     });
-  };
-
-  fetch("/product")
-    .then((response) => response.json())
-    .then((response) => display(response))
-    .catch((error) => console.log(error));
 </script>
-
 </html>

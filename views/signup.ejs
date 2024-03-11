@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,57 +8,166 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-         
         }
 
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
-            border-radius: 20px;
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
-        input[type='text'],
-        input[type='email'],
-        input[type='password'],
-        input[type='submit'],
-        select {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            font-size: 16px;
+        .container {
+            max-width: 1140px;
+            margin: auto;
         }
 
-        input[type='submit'] {
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
+        .align-items {
+            align-items: center;
         }
 
-        input[type='submit']:hover {
-            background-color: #0056b3;
+        .header {
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.118);
         }
-        h1{
+
+        .w-50 {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .w-50.icons {
+            justify-content: flex-end;
+        }
+
+        .icons i,
+        .icons p {
+            margin-right: 10px;
+        }
+
+        .p-title {
+            text-align: left;
+            padding-top: 20px;
             padding-bottom: 20px;
+        }
+        .register-form{
+            margin-bottom: 100px;
+        }
+        .register-form h4 {
+            margin: 20px 0;
+        }
+
+        .register-form h4 a {
+            color: #666666;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .register-form h3 {
+            font-size: 18px;
+            color: #333333;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e5e5e5;
+            margin-bottom: 20px;
+        }
+
+        .register-form form label {
+            width: 18%;
+            text-align: end;
+            font-size: 14px;
+            color: #666666;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .register-form form input {
+            width: 78%;
+            color: #414141;
+            border: 1px solid #e5e5e5;
+            height: 42px;
+            padding: 0 12px;
+            letter-spacing: 1px;
+            margin: 10px 0;
+            outline: none;
+        }
+        .register-form form select {
+            width: 80.3%;
+            color: #414141;
+            border: 1px solid #e5e5e5;
+            height: 42px;
+            padding: 0 12px;
+            letter-spacing: 1px;
+            margin: 10px 0;
+            outline: none;
+        }
+
+        .register-form form span {
+            color: red;
+            padding: 0 5px;
+        }
+        .register-form .sub-btn{
+            background-color: #face1e;
+            margin-bottom: 30px;
+            margin-left: 225px;
+            width: 80.3%;
+            transition: all 0.5s;
+        }
+        .register-form .sub-btn:hover{
+            background-color: black;
+            color: white;
         }
     </style>
 </head>
+
 <body>
     <%- include("nav") %>
-    <center><h1>signup page</h1></center>
-    <form action="/user/signup" method="post">
-        <input type="text" name="username" placeholder="Username">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <select name="role">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-        <input type="submit" value="Signup">
-    </form>
+        <section class="header ">
+            <div class="container row">
+                <div class="w-50">
+                    <p class="p-title">Register Account</p>
+                </div>
+                <div class="w-50 row icons">
+                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <p>Account</p><i class="fa-solid fa-angle-right"></i>
+                    <p>Register</p>
+                </div>
+            </div>
+        </section>
+        <section class="register-form">
+            <div class="container">
+                <h4><a href="/user/login">If you already have an account with us, please login at the login page.</a>
+                </h4>
+                <h3>Your Personal Details</h3>
+                <form action="/user/signup" method="post">
+                    <div class="user row align-items">
+                        <label for="username"><span>*</span>User Name</label>
+                        <input type="text" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="emailid row align-items">
+                        <label for="email"><span>*</span>Your email address</label>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="pass row align-items">
+                        <label for="password"><span>*</span>Password</label>
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    <div class="roles row align-items">
+                        <label for="role">Your Role</label>
+                        <select name="role">
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Signup" class="sub-btn">
+                </form>
+            </div>
+        </section>
+        <%- include("footer") %>
 </body>
+
 </html>

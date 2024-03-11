@@ -10,51 +10,199 @@
             font-family: Arial, sans-serif;
         }
 
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
-        input[type='email'],
-        input[type='text'],
-        input[type='password'],
-        input[type='submit'] {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            font-size: 16px;
+        .container {
+            max-width: 1140px;
+            margin: auto;
         }
 
-        input[type='submit'] {
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
+        .align-items {
+            align-items: center;
         }
 
-        input[type='submit']:hover {
-            background-color: #0056b3;
+        .header {
+            align-items: center;
+            background-color: rgba(128, 128, 128, 0.118);
         }
-        h1{
+
+        .w-50 {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .w-50.icons {
+            justify-content: flex-end;
+        }
+
+        .icons i,
+        .icons p {
+            margin-right: 10px;
+        }
+
+        .p-title {
+            text-align: left;
+            padding-top: 20px;
             padding-bottom: 20px;
+        }
+
+        .login-form .width-box {
+            width: 48%;
+            padding: 30px 10px;
+            margin-bottom: 200px;
+        }
+
+        .login-form .content-form {
+            height: 275px;
+            line-height: 23px;
+            border: 1px solid #e5e5e5;
+            padding: 20px;
+        }
+
+        .login-form h2 {
+            font-size: 18px;
+            color: #333333;
+            letter-spacing: 1px;
+            padding: 10px 0;
+        }
+
+        .login-form h5 {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+        }
+
+        .login-form p {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .login-form .bottom-form {
+            background-color: #f5f5f5;
+            height: 60px;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .login-form .bottom-form a {
+            background-color: #ffce24;
+            padding: 10px 20px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            float: right;
+            margin-top: 10px;
+            margin-right: 10px;
+            color: black;
+            transition: all 0.5s;
+        }
+        .login-form .bottom-form .login-btn:hover,
+        .login-form .bottom-form .continue-btn:hover{
+            background-color: black;
+            color: white;
+           
+        }
+        .login-form .content-form input{
+            width: 100%;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #414141;
+            border: 1px solid #e5e5e5;
+            outline: none;
+            height: 42px;
+            padding: 0 10px;
+            margin-bottom: 10px;
+        }
+        .login-form .content-form label{
+            font-size: 14px;
+            font-weight: 600;
+            color: #666666;
+            letter-spacing: 1px;
+        }
+        .login-form .bottom-form h3 a{
+            font-size: 14px;
+            color: #666666;
+            background-color: transparent;
+            float: left;
+            font-weight: 500;
+        }
+        .login-form .login-btn{
+            background-color: #ffce24;
+            padding: 10px 20px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            font-weight: 600;
+            float: right;
+            border: none;
+            margin-top: 10px;
+            margin-right: 10px;
+            transition: all 0.5s;
+        }
+        .login-form .login-btn:hover{
+            background-color: black;
+            color: white;
         }
     </style>
 </head>
 
 <body>
     <%- include("nav") %>
-    <center><h1>Login Page</h1></center>
-        <form action="/user/login" method="post">
-            <input type="email" name="email" placeholder="Email">
-            <input type="password" name="password" placeholder="Password">
-            <a href="/user/reset" class="reset">Reset Password</a>
-            <input type="submit" value="Login">
-        </form>
+        <section class="header ">
+            <div class="container row">
+                <div class="w-50">
+                    <p class="p-title">Register Account</p>
+                </div>
+                <div class="w-50 row icons">
+                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-angle-right"></i>
+                    <p>Account</p><i class="fa-solid fa-angle-right"></i>
+                    <p>Register</p>
+                </div>
+            </div>
+        </section>
+        <section class="login-form">
+            <div class="container">
+                <div class="row">
+                    <div class="width-box">
+                        <div class="content-form">
+                            <h2>NEW CUSTOMER</h2>
+                            <h5>Register</h5>
+                            <p>By creating an account you will be able to shop faster, be up to date on an order's
+                                status, and keep track of the orders you have previously made.</p>
+                        </div>
+                        <div class="bottom-form">
+                            <a href="/user/signup" class="continue-btn">Continue</a>
+                        </div>
+                    </div>
+                    <div class="width-box">
+                        <div class="content-form">
+                            <h2>RETURNING CUSTOMER</h2>
+                            <h5>I am a returning customer</h5>
+                            <form action="/user/login" method="post">
+                                <label for="email">Your email address</label>
+                                <input type="email" name="email" placeholder="Your email address">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" placeholder="Password">
+                            </form>
+                        </div>
+                        <div class="bottom-form align-items justify-content">
+                            <h3><a href="/user/resetpassword">Forgotten Password</a></h3>
+                            <input type="submit" value="Login" class="login-btn">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <%- include("footer") %>
 </body>
 
 </html>

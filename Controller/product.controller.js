@@ -2,6 +2,11 @@ const Product = require("../Model/Product.model");
 const Cart = require("../Model/cart.model");
 const Razorpay=require("razorpay")
 
+
+// products all
+const products=async(req,res) => {
+    res.render("products")
+}
 const get=async(req,res)=>{
     try {
         let data = await Product.find();
@@ -86,4 +91,4 @@ const payment=async(req,res)=>{
         }
     })
 }
-module.exports={payment,updatecart,getusers,getcreate,adminproduct,create,get,cart,cartdata,getcart}
+module.exports={payment,updatecart,getusers,getcreate,adminproduct,create,get,cart,cartdata,getcart,products}

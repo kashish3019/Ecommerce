@@ -1,17 +1,21 @@
 const verifyToken = require("../Middleware/auth");
 const {Router}=require("express");
-const { getsignup, signup, getlogin, login, getusers, verify, resett, reset, resetPassword } = require("../Controller/user.controller");
+const { getsignup, signup, getlogin, login,logout, otpverify, otpform, resetEmail, forgot, reset,} = require("../Controller/user.controller");
 const UserRoute=Router()
 
+//signup
 UserRoute.get("/signup",getsignup)
-UserRoute.get("/login",getlogin)
-UserRoute.get("/users",verifyToken,getusers)
-UserRoute.get("/verify/:token",verify)
-UserRoute.get("/reset", resett);
-
 UserRoute.post("/signup",signup)
+//login
+UserRoute.get("/login",getlogin)
 UserRoute.post("/login",login)
-UserRoute.post("/reset", reset);
-UserRoute.post("/resetPassword", resetPassword); 
+//logout
+UserRoute.get("/logout",logout)
+//reset password
+UserRoute.post("/reset/otp",otpverify)
+UserRoute.get("/reset/:otp",otpform)
+UserRoute.post("/email",resetEmail)
+UserRoute.get("/resetpassword",forgot)
+UserRoute.post("/reset",verifyToken,reset)
 
 module.exports = UserRoute;

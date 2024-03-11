@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
+  <link rel="stylesheet" href="/all.min.css">
   <style>
     * {
       margin: 0;
@@ -19,22 +20,29 @@
     #nav {
       display: flex;
       justify-content: space-around;
-      background-color: black;
-      color: #ece9e9;
-      padding: 10px;
-      margin-bottom: 20px;
+      background-color: #366E78;
+      padding: 25px;
+      align-items: center;
+    }
+
+   #nav img {
+      width: 100px;
+      height: 50px;
     }
 
     a {
       text-decoration: none;
-      color: #f5eded;
+      color: white;
+      
     }
   </style>
 </head>
 
 <body>
   <div id="nav">
+    <a href="#"><img src="/img/logo.png" alt=""></a>
     <a href="/">home</a>
+    <a href="/product/products">Products</a>
     <a href="/product/create">add product</a>
     <a href="/product/cart">cart</a>
     <a href="/user/login">login</a>

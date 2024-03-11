@@ -2,15 +2,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../Model/user.model");
 const nodemailer = require("nodemailer");
-const otpgenerate = require("otp-generator");
-
+const otpgenerator = require("otp-generator");
+//signup
 const getsignup = async (req, res) => {
     res.render("signup");
 }
 
-const getlogin = async (req, res) => {
-    res.render("login");
-}
 
 const signup = async (req, res) => {
     let { email, password, username, role } = req.body;
@@ -30,7 +27,10 @@ const signup = async (req, res) => {
         }
     });
 }
-
+//login
+const getlogin = async (req, res) => {
+    res.render("login");
+}
 
 const login = async (req, res) => {
     const { email, password } = req.body;
@@ -49,82 +49,94 @@ const login = async (req, res) => {
     }
 }
 
-
-
-const getusers = async (req, res) => {
-    console.log(req.user);
-    res.send({ msg: "checking token" });
+//logout
+const logout = (req, res) => {
+    res.clearCookie("token").send({ message: "Logout Successfull" })
 }
 
-//OTP
-const transporter = nodemailer.createTransport({
+//OTP for password reset
+const transport = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: "kbpatel3019@gmail.com",
         pass: "sksgdkyazmqfsqji",
     },
 });
-let storedToken = "";
-const sendResetEmail = async (email) => {
-    storedToken = otpgenerate.generate(6, {
-        specialChars: false,
-        lowerCaseAlphabets: false,
+let storedOTP = {};
+const resetEmail = async (req, res) => {
+    const { email } = req.body;
+    storedOTP.otp = otpgenerator.generate(6, {
         upperCaseAlphabets: false,
-    });
-
-    const mailOptions = {
+        lowerCaseAlphabets: false,
+        specialChars: false
+    })
+    storedOTP.email = email
+    const mailOption = {
         from: "kbpatel3019@gmail.com",
         to: email,
         subject: "Reset Your Password",
-        html: `<a href="http://localhost:8090/user/verify/${storedToken}">Click to verify your OTP ${storedToken}</a>`,
+        html: `verify your OTP ${storedOTP.otp}</a>`,
     };
-
-    return new Promise((resolve, reject) => {
-        transporter.sendMail(mailOptions, (err, info) => {
-            if (err) {
-                reject(err.message);
-            } else {
-                resolve(info);
-            }
-        });
-    });
+    transport.sendMail(mailOption, (err, info) => {
+        if (err) {
+            console.log(err.message)
+        }
+        else {
+            console.log(info)
+        }
+    })
+    res.render("otp")
 };
+const otpform = (req, res) => {
+    res.render("otp")
+}
+const otpverify = (req, res) => {
+    let { otp } = req.body;
+    console.log(otp, storedOTP);
+    try {
+        if (otp === storedOTP.otp) {
+            res.render("reset")
+        } else {
+            res.send("Wrong OTP");
+        }
+    }
+    catch (error) {
+        res.send({ error: "error" })
+    }
+}
+
+const forgot = (req, res) => {
+    res.render("resetform")
+}
 
 const reset = async (req, res) => {
-    const { email } = req.body;
-
     try {
-        await sendResetEmail(email);
-        res.send("OTP send to your email");
-    } catch (error) {
-        res.status(500).send( error);
+        const { newpassword, confirmpassword } = req.body;
+        if (newpassword == confirmpassword) {
+            let updatedata = await UserModel.findOne({ email: storedOTP.email })
+            console.log("updatedata", updatedata);
+            if (updatedata) {
+                bcrypt.hash(newpassword, 5, async (err, hash) => {
+                    if (err) {
+                        return res.send({ error: err.message });
+                    }
+                    // let object = { password: hash }
+                    // let data = await UserModel.findOneAndUpdate(object)
+                    updatedata.password = hash
+
+                    console.log("password", updatedata);
+                    await updatedata.save()
+
+                    return res.send(updatedata);
+                })
+            }
+        }
+        else {
+            res.send("password not change")
+        }
     }
-};
-
-const resett = (req, res) => {
-    res.render("reset");
-};
-
-const verify = async (req, res) => {
-    let { token } = req.params;
-    if (token === storedToken) {
-        res.render("passwordResetForm", { token });
-    } else {
-        res.send("Wrong OTP. Unable to reset the password.");
+    catch (error) {
+        res.send({ error: "error" })
     }
-};
-
-const resetPassword = async (req, res) => {
-    const { token, newPassword } = req.body;
-
-    try {
-        const user = await UserModel.findOneAndUpdate({ resetToken: token }, { password: newPassword });
-        storedToken = "";
-
-        res.send("Password reset successfully.");
-    } catch (error) {
-        res.status(500).send("Error resetting password: " + error);
-    }
-};
-
-module.exports = {verify, resetPassword,reset,resett,verify, getlogin, getsignup, login, signup, getusers };
+}
+module.exports = { forgot, reset, resetEmail, otpverify, otpform, logout, getlogin, getsignup, login, signup };

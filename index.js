@@ -16,10 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/user", UserRoute);
 app.use("/product", ProductRoute);
-app.get("/",verifyToken,(req,res)=>{
+app.get("/",(req,res)=>{
   res.render("home")
 })
-app.listen(8000, () => {
+app.listen(8090, () => {
   connect();
-  console.log("Listening on 8000");
+  console.log("Listening on 8090");
 });
