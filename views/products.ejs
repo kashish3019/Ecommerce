@@ -5,67 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>All Products</title>
-  <style>
-    body{
-      background-color: #f5f5f5;
-    }
-    #box {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 13px 13px 0px;
-    }
-    
-    .product-details-container {
-      text-align: center;
-      padding: 20px;
-      border-radius: 15px;
-      border: 1px solid rgba(0, 0, 0, 0.313);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .product-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 10px;
-      /* border: 1px solid rgba(0, 0, 0, 0.313); */
-      margin-bottom: 10px;
-    }
-    
-    .product-details {
-      text-align: left;
-    }
-    
-    .product-details h3 {
-      margin: 5px 0;
-      font-weight: bold;
-    }
-    
-    .product-details p {
-      margin: 5px 0;
-    }
-    
-    #box div button {
-      border-radius: 10px;
-      padding: 6px 40px 6px;
-      margin-top: 10px;
-      background-color: #439bab5a;
-    }
-    
-    #box div button:hover { 
-      background-color: #366E78;
-      transition: all 0.5s;
-    }
-    
-    .p-title {
-      text-align: center;
-      padding-top: 20px;
-      font-weight: 700;
-      padding-bottom: 20px;
-    }
-  </style>
+  <link rel="stylesheet" href="/footer.css">
+<link rel="stylesheet" href="/css/products.css">
 </head>
 
 <body>
@@ -73,6 +14,7 @@
   <%- include("nav") %>
   <p class="p-title">All Products</p>
   <div id="box"></div>
+  <%- include("footer") %>
 
   <script>
     const handlecart = (id) => {

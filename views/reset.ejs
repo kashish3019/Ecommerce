@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>reset password</title>
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="/css/reset.css">
 </head>
 <body>
     <%- include("nav") %>
     <section class="resetform">
-        <h1>Forget Password</h1>
+        <h1>Create New Password</h1>
         <form action="/user/reset" method="post">
-            <input type="text" name="newpassword" placeholder="Enter your new Password" required>
-            <input type="text" name="confirmpassword" placeholder="Enter your confirm password" required>
-            <input type="submit" value="change Password">
+            <div class="login-form">
+                <div class="container">
+                    <div class="row">
+                        <div class="width-box">
+                            <div class="content-form">
+                                <input type="text" name="newpassword" placeholder="Enter your new Password" class="reset-input" required>
+                                <input type="text" name="confirmpassword" placeholder="Enter your confirm password" class="reset-input" required>
+                            </div>
+                            <div class="bottom-form">
+                                <input type="submit" value="Change Password" class="login-btn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </section>
+    <% include("footer") %>
 </body>
 </html>

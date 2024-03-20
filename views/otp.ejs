@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Otp</title>
+    <link rel="stylesheet" href="/css/otp.css">
 </head>
+
 <body>
     <%- include("nav") %>
     <section class="resetform">
         <h1>OTP verify</h1>
         <form action="/user/reset/otp" method="post">
-            <input type="text" name="otp" placeholder="Enter your OTP " >
-           <button id="submit">Submit</button>
+            <div class="login-form">
+                <div class="container">
+                    <div class="row">
+                        <div class="width-box">
+                            <div class="content-form">
+                                <input type="text" name="otp" placeholder="Enter your OTP" class="otp-input">
+                            </div>
+                            <div class="bottom-form">
+                                <input type="submit" id="submit" value="Submit" class="login-btn">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </section>
 </body>
+
 </html>

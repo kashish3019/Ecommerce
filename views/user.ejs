@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>user</title>
+  <link rel="stylesheet" href="/footer.css">
+
   <style>
     img {
       width: 200px;
@@ -15,12 +17,17 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
     }
+    .w-25{
+      width: 25%;
+    }
   </style>
 </head>
 
 <body>
   <%- include("nav") %>
     <div id="box"></div>
+    <%- include("footer") %>
+
 </body>
 <script>
   const display = (data) => {

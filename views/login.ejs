@@ -5,153 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .container {
-            max-width: 1140px;
-            margin: auto;
-        }
-
-        .align-items {
-            align-items: center;
-        }
-
-        .header {
-            align-items: center;
-            background-color: rgba(128, 128, 128, 0.118);
-        }
-
-        .w-50 {
-            width: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        .w-50.icons {
-            justify-content: flex-end;
-        }
-
-        .icons i,
-        .icons p {
-            margin-right: 10px;
-        }
-
-        .p-title {
-            text-align: left;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .login-form .width-box {
-            width: 48%;
-            padding: 30px 10px;
-            margin-bottom: 200px;
-        }
-
-        .login-form .content-form {
-            height: 275px;
-            line-height: 23px;
-            border: 1px solid #e5e5e5;
-            padding: 20px;
-        }
-
-        .login-form h2 {
-            font-size: 18px;
-            color: #333333;
-            letter-spacing: 1px;
-            padding: 10px 0;
-        }
-
-        .login-form h5 {
-            font-size: 14px;
-            color: #666666;
-            font-weight: 500;
-            letter-spacing: 1px;
-            padding-bottom: 10px;
-        }
-
-        .login-form p {
-            font-size: 14px;
-            color: #666666;
-            font-weight: 500;
-            letter-spacing: 1px;
-        }
-
-        .login-form .bottom-form {
-            background-color: #f5f5f5;
-            height: 60px;
-            border: 1px solid #e5e5e5;
-        }
-        
-        .login-form .bottom-form a {
-            background-color: #ffce24;
-            padding: 10px 20px;
-            font-size: 14px;
-            letter-spacing: 1px;
-            font-weight: 600;
-            float: right;
-            margin-top: 10px;
-            margin-right: 10px;
-            color: black;
-            transition: all 0.5s;
-        }
-        .login-form .bottom-form .login-btn:hover,
-        .login-form .bottom-form .continue-btn:hover{
-            background-color: black;
-            color: white;
-           
-        }
-        .login-form .content-form input{
-            width: 100%;
-            font-size: 14px;
-            letter-spacing: 1px;
-            color: #414141;
-            border: 1px solid #e5e5e5;
-            outline: none;
-            height: 42px;
-            padding: 0 10px;
-            margin-bottom: 10px;
-        }
-        .login-form .content-form label{
-            font-size: 14px;
-            font-weight: 600;
-            color: #666666;
-            letter-spacing: 1px;
-        }
-        .login-form .bottom-form h3 a{
-            font-size: 14px;
-            color: #666666;
-            background-color: transparent;
-            float: left;
-            font-weight: 500;
-        }
-        .login-form .login-btn{
-            background-color: #ffce24;
-            padding: 10px 20px;
-            font-size: 14px;
-            letter-spacing: 1px;
-            font-weight: 600;
-            float: right;
-            border: none;
-            margin-top: 10px;
-            margin-right: 10px;
-            transition: all 0.5s;
-        }
-        .login-form .login-btn:hover{
-            background-color: black;
-            color: white;
-        }
-    </style>
+   <link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
@@ -192,13 +46,13 @@
                                 <input type="email" name="email" placeholder="Your email address">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" placeholder="Password">
+                            </div>
+                            <div class="bottom-form align-items justify-content">
+                                <h3><a href="/user/resetpassword">Forgotten Password</a></h3>
+                                <input type="submit" value="Login" class="login-btn">
+                            </div>
+                        </div>
                             </form>
-                        </div>
-                        <div class="bottom-form align-items justify-content">
-                            <h3><a href="/user/resetpassword">Forgotten Password</a></h3>
-                            <input type="submit" value="Login" class="login-btn">
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>

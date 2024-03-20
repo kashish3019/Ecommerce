@@ -1,0 +1,100 @@
+footer{
+    background-color: #222222;
+}
+.text-white{
+    color: white;
+}
+.container{
+    max-width: 1140px;
+    margin: auto;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.w-25{
+    width: 25%;
+}
+.img-footer{
+    width: 170px;
+    height: 80px;
+}
+.email{
+    justify-content: space-between;
+    padding: 30px 10px;
+    align-items: center;
+    border-bottom: 1px solid #5f5f5f;
+}
+.email .email-heading h2{
+    font-size: 30px;
+    font-weight: 200;
+}
+.email .email-box input{
+    font-size: 15px;
+    padding: 0 10px;
+    width: 400px;
+    height: 42px;
+    letter-spacing: 1px;
+    outline: none;
+}
+.email .email-box button{
+    font-size: 15px;
+    padding: 10px;
+    background-color: #face1e;
+    border: none;
+    margin-left: 10px;
+    letter-spacing: 1px;
+}
+.footer-content{
+    padding: 50px 0;
+    border-bottom: 1px solid #5f5f5f;
+    position: relative;
+}
+.footer-content p{
+    color: #cccccc;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 20px 0;
+    line-height: 25px;
+}
+.footer-content h1{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+.footer-content ul li{
+    list-style: none;
+    margin-bottom: 15px;
+}
+.footer-content ul li a{
+    color: white;
+    letter-spacing: 1px;
+    color: #cccccc;
+    font-size: 15px;
+}
+.footer-content ul li a:hover{
+    color: #face1e;
+}
+.footer-content .fa-location-dot{
+    padding-bottom: 15px;
+}
+.footer-content .footer-icon{
+    position: absolute;
+    bottom: -20px;
+    left: 40%;
+    right: 40.5%;
+    background-color: #222222;
+}
+.footer-content .footer-icon i{
+    font-size: 20px;
+    padding: 10px;
+}
+.copyright h2{
+    text-align: center;
+    color: #cccccc;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
